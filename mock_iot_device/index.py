@@ -1,6 +1,8 @@
 import random
 import sys
 import requests
+import time
+from datetime import datetime
 from threading import Timer
 
 local_broker_url = 'http://localhost:5000'
@@ -49,13 +51,16 @@ def emit_signal_from_random_people():
             "field1": iot_device_id,
             "field2": random_point[0],
             "field3": random_point[1],
+            "field4": datetime.now(),
         }
 
         print(f'sending {random_point} data...')
 
         r = requests.get(thing_speak_base_url, params=params)
 
-        print(f'status: {r.status_code}')
+        print(f'status: {r.status_code} text: {r.text}')
+
+        time.sleep(10)
 
 
 setInterval(emit_signal_interval, emit_signal_from_random_people)
