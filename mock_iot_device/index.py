@@ -1,11 +1,10 @@
 import random
 import sys
 import requests
-import time
-from datetime import datetime
+import json
 from threading import Timer
 
-local_broker_url = 'http://localhost:5000'
+local_broker_url = 'http://localhost:3435'
 
 iot_device_id = sys.argv[1]
 
@@ -19,48 +18,40 @@ people_range_max = 10
 
 emit_signal_interval = 20
 
-thing_speak_write_key = 'OZ8NWYT5WRLPW36V'
-thing_speak_base_url = 'https://api.thingspeak.com/update'
 
-
-def person_point_random_generate():
-    random_width = random.randrange(0, room_width + 1)
-    random_heigth = random.randrange(0, room_heigth + 1)
-    return [random_width, random_heigth]
+def coordinates_random_generate():
+    x = random.randrange(0, room_width + 1)
+    y = random.randrange(0, room_heigth + 1)
+    return [x, y]
 
 
 def people_points_random_generate():
     people_length = random.randint(people_range_min, people_range_max)
-    return [person_point_random_generate() for _ in range(people_length)]
+    return [coordinates_random_generate() for _ in range(people_length)]
 
 
-def setInterval(timer, task):
-    isStop = task()
-    if not isStop:
-        Timer(timer, setInterval, [timer, task]).start()
+def set_interval(timer, task):
+    is_stop = task()
+    if not is_stop:
+        Timer(timer, set_interval, [timer, task]).start()
 
 
-def emit_signal_from_random_people():
+def send_data_to_local_broker():
     random_points = people_points_random_generate()
 
     print(f'generated points {random_points}')
 
-    for random_point in random_points:
-        params = {
-            "api_key": thing_speak_write_key,
-            "field1": iot_device_id,
-            "field2": random_point[0],
-            "field3": random_point[1],
-            "field4": datetime.now(),
-        }
+    body = {
+        'iot_device_id': iot_device_id,
+        'random_points': random_points
+    }
 
-        print(f'sending {random_point} data...')
-
-        r = requests.get(thing_speak_base_url, params=params)
-
-        print(f'status: {r.status_code} text: {r.text}')
-
-        time.sleep(10)
+    try:
+        print('sending data to local broker ...')
+        response = requests.post(local_broker_url, data=json.dumps(body))
+        print(f'status: {response.status_code} text: {response.text}')
+    except:
+        print('error in local broker connection ...')
 
 
-setInterval(emit_signal_interval, emit_signal_from_random_people)
+set_interval(emit_signal_interval, send_data_to_local_broker)

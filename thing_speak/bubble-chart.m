@@ -1,9 +1,9 @@
 tiledlayout(2,2,'TileSpacing','none')
 
-create_chart('Frios', 1, [6 1 1])
-create_chart('Bebidas', 2, [4.5 1 1])
-create_chart('Limpeza', 3, [5.3 1.1 1])
-create_chart('Hortifruti', 4, [5.5 1 1])
+create_chart('Frios', 1, [0.28 0.75 0 0])
+create_chart('Bebidas', 2, [0.65 0.75 0 0])
+create_chart('Limpeza', 3, [0.28 0.35 0 0])
+create_chart('Hortifruti', 4, [0.65 0.35 0 0])
 
 function f_create_chart = create_chart(chart_name, device_id, position)
     readAPIKey = 'V79KCD77H54DO184';
@@ -14,7 +14,7 @@ function f_create_chart = create_chart(chart_name, device_id, position)
     fieldID3 = 3;
     fieldID4 = 4;
     
-    ammount_data = 50;
+    ammount_data = 500;
     
     array_id = thingSpeakRead(readChannelID, 'Field', fieldID1, 'NumPoints', ammount_data, 'ReadKey', readAPIKey);
     array_x = thingSpeakRead(readChannelID, 'Field', fieldID2, 'NumPoints', ammount_data, 'ReadKey', readAPIKey);
@@ -78,11 +78,6 @@ function f_create_chart = create_chart(chart_name, device_id, position)
                        index2_color_green = new_color_array{index2, 2};
                        index2_color_blue = new_color_array{index2, 3};
                        
-                       new_color_array{index2}
-                       index2_color_red
-                       index2_color_green 
-                       index2_color_blue 
-                       
                        at_same_period = (index2_color_red == 1 && is_afternoon) || (index2_color_green == 1 && is_morning) || (index2_color_blue == 1 && is_nigth)
                        
                        if ~at_same_period
@@ -129,7 +124,6 @@ function f_create_chart = create_chart(chart_name, device_id, position)
     
     set(gca,'XTick',[], 'YTick', []);
    
-    lgd = legend({'a', 'b'}, 'Location', 'southwest');
-
+    annotation('textbox',position,'String',chart_name,'BackgroundColor', 'white', 'FaceAlpha', 0.8, 'FitBoxToText', 'on');
 end
 
