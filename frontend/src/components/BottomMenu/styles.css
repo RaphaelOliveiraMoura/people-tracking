@@ -1,0 +1,32 @@
+#bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: #ddd;
+  font-size: 18px;
+}
+
+#bottom-menu ul {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#bottom-menu ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#bottom-menu ul li + li {
+  border-left: 1px solid #333;
+}
+
+#bottom-menu ul li div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
