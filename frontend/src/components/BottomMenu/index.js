@@ -17,7 +17,7 @@ function BottomMenu() {
         <li>
           <div>
             <AiOutlinePieChart size={26} />
-            <span>Gráficos setores</span>
+            <span>Gráficos Setores</span>
           </div>
         </li>
       </ul>

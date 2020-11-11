@@ -1,0 +1,18 @@
+#thingspeak-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#thingspeak-chart .refresh {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#thingspeak-chart img {
+  width: 100%;
+}
