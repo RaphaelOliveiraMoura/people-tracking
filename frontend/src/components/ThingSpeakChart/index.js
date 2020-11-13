@@ -6,7 +6,12 @@ import "./styles.css";
 
 import getThingspeakImage from "../../services/getThingspeakImage";
 
-function ThingSpeakChart({ plot_id, heigth = 260, width = 450 }) {
+function ThingSpeakChart({
+  plot_id,
+  heigth = 260,
+  width = 450,
+  refresh = true,
+}) {
   const [imageUrl, setImageUrl] = useState("");
 
   const loadThingspeakImage = useCallback(async () => {
@@ -28,16 +33,19 @@ function ThingSpeakChart({ plot_id, heigth = 260, width = 450 }) {
 
   return (
     <div id="thingspeak-chart">
-      <div
-        className="refresh"
-        onClick={() => {
-          setImageUrl("");
-          loadThingspeakImage();
-        }}
-      >
-        <MdRefresh size={20} />
-        <span>Recarregar gráfico</span>
-      </div>
+      {refresh && (
+        <div
+          className="refresh"
+          onClick={() => {
+            setImageUrl("");
+            loadThingspeakImage();
+          }}
+        >
+          <MdRefresh size={20} />
+          <span>Recarregar gráfico</span>
+        </div>
+      )}
+
       {imageUrl && (
         <Image
           src={imageUrl}

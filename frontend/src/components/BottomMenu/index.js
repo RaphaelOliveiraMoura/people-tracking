@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import { AiOutlineDotChart, AiOutlinePieChart } from "react-icons/ai";
 
@@ -9,16 +10,16 @@ function BottomMenu() {
     <menu id="bottom-menu">
       <ul>
         <li>
-          <div>
+          <NavLink activeClassName="active" to="/" exact>
             <AiOutlineDotChart size={26} />
             <span>Gráfico Geral</span>
-          </div>
+          </NavLink>
         </li>
         <li>
-          <div>
+          <NavLink activeClassName="active" to="/departaments" exact>
             <AiOutlinePieChart size={26} />
             <span>Gráficos Setores</span>
-          </div>
+          </NavLink>
         </li>
       </ul>
     </menu>
