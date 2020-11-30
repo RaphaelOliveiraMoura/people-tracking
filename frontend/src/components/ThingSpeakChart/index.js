@@ -37,8 +37,8 @@ function ThingSpeakChart({
         <div
           className="refresh"
           onClick={() => {
-            setImageUrl("");
-            loadThingspeakImage();
+            // eslint-disable-next-line no-restricted-globals
+            location.reload();
           }}
         >
           <MdRefresh size={20} />

@@ -8,7 +8,10 @@ from utils.set_interval import set_interval
 thing_speak_write_key = 'OZ8NWYT5WRLPW36V'
 thing_speak_base_url = 'https://api.thingspeak.com/update'
 
-emit_signal_interval = 10
+emit_signal_interval = 20
+
+total_time_calculation = 60
+min_time_calculation = 15
 
 
 def send_data_to_thingspeak():
@@ -29,7 +32,10 @@ def send_data_to_thingspeak():
 
         print(f'status: {response.status_code} text: {response.text}')
 
-        time.sleep(emit_signal_interval / len(people_points) or 1)
+        slice_time = total_time_calculation / len(people_points)
+        time_to_sleep = slice_time if slice_time >= min_time_calculation else min_time_calculation
+
+        time.sleep(time_to_sleep)
 
 
 sqlite.init()

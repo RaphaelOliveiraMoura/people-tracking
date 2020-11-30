@@ -1,0 +1,12 @@
+{
+  "name": "local-broker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "db:clear": "rm ./database/sqlite.db",
+    "start:mocks": "python3 mock_iot_device.py 1 & python3 mock_iot_device.py 2 & python3 mock_iot_device.py 3 & python3 mock_iot_device.py 4",
+    "start": "python3 local-broker.py"
+  },
+  "dependencies": {}
+}

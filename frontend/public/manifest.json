@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "People Tracking",
+  "name": "Application to track people coordinates",
   "icons": [
     {
       "src": "favicon.ico",

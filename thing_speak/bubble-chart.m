@@ -21,8 +21,12 @@ function f_create_chart = create_chart(chart_name, device_id, position)
     array_y = thingSpeakRead(readChannelID, 'Field', fieldID3, 'NumPoints', ammount_data, 'ReadKey', readAPIKey);
     table_date = thingSpeakRead(readChannelID, 'OutputFormat','table', 'Field', fieldID4, 'NumPoints', ammount_data, 'ReadKey', readAPIKey);
     
-    array_date = table2array(table_date(:,2));
-    
+    if height(table_date) > 0
+       array_date = table2array(table_date(:,2));
+    else 
+       array_date = {};
+    end
+
     new_x_array = {};
     new_y_array = {};
     new_z_array = {};
